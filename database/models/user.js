@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
     });
 
-    User.hasMay(models.Message, {
+    User.hasMany(models.Message, {
       foreignKey: 'senderId',
       as: 'sentMessages',
     })
