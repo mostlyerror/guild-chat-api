@@ -20,8 +20,21 @@ If you have NVM installed, node version should automatically be set upon
 entering the project root.
 *  Node Version Manager ([NVM](https://github.com/nvm-sh/nvm))
 
-With postgres installed locally follow the steps below to create development and test databases:
+## Setup
+Install package dependencies
+```
+$ npm install
+```
+
+With local postgres installation, create development and test databases:
 ```
 $ createdb -U postgres guild_chat_api_development
 $ createdb -U postgres guild_chat_api_test
+```
+
+Migrate and seed database:
+```
+$ npm i -g sequelize-cli
+$ sequelize db:migrate
+$ sequelize db:seed:all
 ```
