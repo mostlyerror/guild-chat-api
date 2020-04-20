@@ -6,12 +6,12 @@ const HttpStatus = require("http-status-codes");
 const { User, Message } = require("../database/models");
 
 const paramValidations = () => {
-  return [check("recipientId").isInt()];
+  return [check("userId").isInt()];
 };
 
 const handler = async (req, res, next) => {
   const user = await User.findOne({
-    where: { id: req.params.recipientId },
+    where: { id: req.params.userId },
   });
 
   try {

@@ -22,7 +22,7 @@ beforeAll(async () => {
   });
 });
 
-describe("posting a message", () => {
+describe("postMessage", () => {
   it("inserts a Message", async () => {
     const messageData = {
       senderId: finn.id,
@@ -131,7 +131,7 @@ describe("posting a message", () => {
 });
 
 
-describe("getting messages for a recipient", () => {
+describe("getMessagesForRecipient", () => {
   beforeEach(async () => {
     await Message.destroy({truncate: true})
   })
