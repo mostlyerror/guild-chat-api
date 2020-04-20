@@ -1,7 +1,7 @@
-const postMessage = require('./postMessage')
-const getMessagesForRecipient = require('./getMessagesForRecipient')
+const postMessage = require("./postMessage");
+const getMessagesForRecipient = require("./getMessagesForRecipient");
 
 module.exports = {
-    postMessage,
-    getMessagesForRecipient
-}
+  postMessage,
+  getMessagesForRecipient,
+};

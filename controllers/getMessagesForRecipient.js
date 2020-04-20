@@ -1,6 +1,7 @@
 const { check, validationResult } = require("express-validator");
 const { Op } = require("sequelize");
 const moment = require("moment");
+const HttpStatus = require("http-status-codes");
 
 const { User, Message } = require("../database/models");
 
@@ -11,7 +12,7 @@ module.exports = {
     const validationErrors = validationResult(req);
     if (!validationErrors.isEmpty()) {
       return res
-        .status(422)
+        .status(HttpStatus.UNPROCESSABLE_ENTITY)
         .json({ validationErrors: validationErrors.array() });
     }
 
@@ -36,11 +37,13 @@ module.exports = {
         });
       }
 
-      res.status(200).json({ messages });
+      res.status(HttpStatus.OK).json({ messages });
       next();
     } catch (err) {
       console.error(err);
-      res.status(500).json({ error: err.message }) && next(err);
+      res
+        .status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .json({ error: err.message }) && next(err);
     }
   },
 };

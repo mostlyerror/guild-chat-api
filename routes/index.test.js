@@ -1,5 +1,6 @@
 const request = require("supertest");
 const moment = require('moment')
+const HttpStatus = require('http-status-codes')
 
 const app = require("../server");
 const { User, Message } = require("../database/models");
@@ -31,7 +32,7 @@ describe("create message", () => {
 
     const res = await request(app).post("/api/messages").send(messageData)
 
-    expect(res.statusCode).toEqual(201);
+    expect(res.statusCode).toEqual(HttpStatus.CREATED);
     expect(res.body).toHaveProperty("message");
     expect(res.body.message).toMatchObject(messageData)
   });
@@ -44,7 +45,7 @@ describe("create message", () => {
         content: "adios amigo",
       });
 
-    expect(res.statusCode).toEqual(422)
+    expect(res.statusCode).toEqual(HttpStatus.UNPROCESSABLE_ENTITY)
 
     res = await request(app)
       .post("/api/messages")
@@ -53,7 +54,7 @@ describe("create message", () => {
         recipientId: jake.id,
       });
 
-    expect(res.statusCode).toEqual(422)
+    expect(res.statusCode).toEqual(HttpStatus.UNPROCESSABLE_ENTITY)
   });
 
   it("returns 404 when user is not found", async () => {
@@ -65,7 +66,7 @@ describe("create message", () => {
         content: "adios amigo",
       });
 
-    expect(res.statusCode).toEqual(404)
+    expect(res.statusCode).toEqual(HttpStatus.NOT_FOUND)
 
     res = await request(app)
       .post("/api/messages")
@@ -75,7 +76,7 @@ describe("create message", () => {
         content: "adios amigo",
       });
 
-    expect(res.statusCode).toEqual(404)
+    expect(res.statusCode).toEqual(HttpStatus.NOT_FOUND)
   });
 
   it("sender cannot be recipient", async () => {
@@ -87,7 +88,7 @@ describe("create message", () => {
         content: "adios amigo",
       });
 
-    expect(res.statusCode).toEqual(422)
+    expect(res.statusCode).toEqual(HttpStatus.UNPROCESSABLE_ENTITY)
   })
 
   it("message content between 10 and 140 chars", async () => {
@@ -101,7 +102,7 @@ describe("create message", () => {
       });
 
     expect(content.length).toEqual(9)
-    expect(res.statusCode).toEqual(422)
+    expect(res.statusCode).toEqual(HttpStatus.UNPROCESSABLE_ENTITY)
 
     content = "B".repeat(141)
     res = await request(app)
@@ -113,7 +114,7 @@ describe("create message", () => {
       });
 
     expect(content.length).toEqual(141)
-    expect(res.statusCode).toEqual(422)
+    expect(res.statusCode).toEqual(HttpStatus.UNPROCESSABLE_ENTITY)
 
     content = "C".repeat(140)
     res = await request(app)
@@ -125,7 +126,7 @@ describe("create message", () => {
       });
 
     expect(content.length).toEqual(140)
-    expect(res.statusCode).toEqual(201)
+    expect(res.statusCode).toEqual(HttpStatus.CREATED)
   });
 });
 
@@ -168,7 +169,7 @@ describe("getMessages", () => {
 
     const res = await request(app).get(`/api/messages/${jake.id}`)
 
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(HttpStatus.OK);
     expect(res.body).toHaveProperty("messages");
     expect(res.body.messages.length).toBeLessThan(101)
   })
@@ -196,7 +197,7 @@ describe("getMessages", () => {
     
     const res = await request(app).get(`/api/messages/${jake.id}`)
 
-    expect(res.statusCode).toEqual(200);
+    expect(res.statusCode).toEqual(HttpStatus.OK);
     expect(res.body).toHaveProperty("messages");
     expect(res.body.messages.length).toEqual(2);
   })
