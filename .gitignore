@@ -7,3 +7,6 @@ yarn-lock.json
 
 # misc
 scratch
+
+# vs code
+*.code-workspace

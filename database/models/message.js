@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
     recipientId: DataTypes.INTEGER,
     senderId: DataTypes.INTEGER,
-    content: DataTypes.TEXT
+    content: DataTypes.TEXT,
+    active: DataTypes.BOOLEAN,
   }, {});
 
   Message.associate = function(models) {
