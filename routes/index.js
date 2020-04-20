@@ -1,18 +1,21 @@
 const { Router } = require("express");
-const controllers = require("../controllers");
+
+const { validateParams, getMessagesForRecipient, postMessage } = require("../controllers");
 
 const router = Router();
 
 router.get(
   "/messages/:recipientId",
-  controllers.getMessagesForRecipient.validator,
-  controllers.getMessagesForRecipient.handler
+  getMessagesForRecipient.paramValidations(),
+  validateParams,
+  getMessagesForRecipient.handler
 );
 
 router.post(
   "/messages",
-  controllers.postMessage.validator,
-  controllers.postMessage.handler
+  postMessage.paramValidations(),
+  validateParams,
+  postMessage.handler
 );
 
 module.exports = router;

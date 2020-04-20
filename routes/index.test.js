@@ -22,7 +22,7 @@ beforeAll(async () => {
   });
 });
 
-describe("create message", () => {
+describe("posting a message", () => {
   it("inserts a Message", async () => {
     const messageData = {
       senderId: finn.id,
@@ -37,7 +37,7 @@ describe("create message", () => {
     expect(res.body.message).toMatchObject(messageData)
   });
 
-  it("rejects when required inputs are missing", async () => {
+  it("sender, recipient, and content are required", async () => {
     let res = await request(app)
       .post("/api/messages")
       .send({
@@ -131,7 +131,7 @@ describe("create message", () => {
 });
 
 
-describe("getMessages", () => {
+describe("getting messages for a recipient", () => {
   beforeEach(async () => {
     await Message.destroy({truncate: true})
   })
