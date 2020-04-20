@@ -39,3 +39,6 @@ $ npm run start-dev
 
 Automatically generated API documentation can be found at:
 `http://localhost:3300/api/docs`
+
+Postman collection:
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/afde0cc6de475ad15e21)
