@@ -132,8 +132,8 @@ describe("create message", () => {
 
 
 describe("getMessages", () => {
-  beforeEach(() => {
-    Message.destroy({truncate: true})
+  beforeEach(async () => {
+    await Message.destroy({truncate: true})
   })
 
   it("responds with list of messages for a recipient", async () => {
