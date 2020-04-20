@@ -8,21 +8,21 @@ entering the project root.
 
 ### Setup
 
-Run the following commands from the project root.
-
-Install package dependencies
+Execute the `setup` script found at the project root.
 ```
+$ ./setup
+```
+
+The following commands will be run
+```
+# install package dependencies
 $ npm install
-```
 
-With local postgres installation, create development and test databases:
-```
+# create development and test databases:
 $ createdb -U postgres guild_chat_api_development
 $ createdb -U postgres guild_chat_api_test
-```
 
-Migrate and seed database. Sequelize loads postgres connection strings located in `.env` file in the root.
-```
+# Migrate and seed database. Sequelize loads postgres connection strings located in `.env` file in the root.
 $ npx sequelize-cli db:migrate
 $ npx sequelize-cli db:seed:all
 ```
@@ -32,7 +32,7 @@ Execute tests:
 $ npm test
 ```
 
-Start the development server:
+Start development server:
 ```
 $ npm run start-dev
 ```

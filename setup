@@ -1,0 +1,5 @@
+npm install
+createdb -U postgres guild_chat_api_development
+createdb -U postgres guild_chat_api_test
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
